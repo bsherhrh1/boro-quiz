@@ -78,7 +78,6 @@ export default function Chart({setSelectedMonth, selectedMonth}){
     }
 
     function calculateBudgetHeight(){
-        console.log("calculateBudgetHeight: ",(maxBarHeight*overall_budget) / maxValue)
         const budgetHeight = (maxBarHeight*overall_budget) / maxValue
         return maxBarHeight-budgetHeight
     }
@@ -86,7 +85,6 @@ export default function Chart({setSelectedMonth, selectedMonth}){
     function calculateMaxValue({income, spending}){
         const maxIncome=Math.max.apply(Math, income.map(function(o) { return o.income; }))  
         const maxSpending=Math.max.apply(Math, spending.map(function(o) { return o.spending; }))
-        console.log("max value: ", maxIncome>maxSpending? maxIncome: maxSpending)
         return maxIncome>maxSpending? maxIncome: maxSpending
     }
 
@@ -99,9 +97,13 @@ export default function Chart({setSelectedMonth, selectedMonth}){
     }
 
     useEffect(()=>{
-        const latestMonthData=inputData.spending;
-
-    })
+        const latestMonthDataIndex=inputData.spending.length-1;
+        setSelectedMonth({
+            income: inputData.income[latestMonthDataIndex].income,
+            spending: inputData.spending[latestMonthDataIndex].spending,
+            month: inputData.spending[latestMonthDataIndex].month,
+        })
+    },[])
 
     // UI
     return(

@@ -4,7 +4,7 @@ import Chart from './Chart'
 
 export default function Widget(){
     // STATE
-    let [selectedMonth, setSelectedMonth] = useState({spending:'', income: '', month:''})
+    let [selectedMonth, setSelectedMonth] = useState({})
 
     // UI
     return(
