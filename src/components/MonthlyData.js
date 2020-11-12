@@ -5,9 +5,9 @@ export default function MonthlyData({selectedMonth}){
     const {spending, income, month} = selectedMonth
     // UI
     return(
-        <section style={{display:'flex', flexDirection:'column', marginLeft:'3rem'}}>
+        <section id='monthly-data-container'>
          <h3>{month}</h3>
-         <div style={{display:'flex'}}>
+         <div id='monthly-data-items'>
              <DataItem text='Spending' value={spending} color='#428DFC'/>
              <DataItem text='Income' value={income}  color='#0CE381'/>
          </div>
@@ -22,9 +22,9 @@ function DataItem({
 }){
     // UI
     return(
-    <div style={{display:'flex', alignItems:'baseline', marginRight:'2.5rem'}}>
-        <div style={{background:color, width:'1rem', height:'1rem', borderRadius:'50%', marginRight:'0.5rem'}}></div>
-        <div style={{display: 'flex',flexDirection:'column'}}>
+    <div id='monthly-data-item'>
+        <div id='monthly-data-item-circle' style={{background:color}}></div>
+        <div id='monthly-data-item-text'>
         {text}
         <strong>{value}</strong>
         </div>

@@ -5,7 +5,7 @@ import moment from 'moment';
 const maxBarHeight= 30; // 30vh
 
 const defaultInputData={
-    "overall_budget": 600,
+    "overall_budget": 200,
     "spending": [
     {
     "month": 10,
@@ -107,14 +107,14 @@ export default function Chart({setSelectedMonth, selectedMonth}){
 
     // UI
     return(
-        <section style={{marginTop:'25vh'}}>
-            <div style={{position: 'relative',top:`${calculateBudgetHeight()}vh`}}>
-                <div style={{float:'right', marginRight:'2vw'}}>
+        <section>
+            <div id='chart-container' style={{top:`${calculateBudgetHeight()}vh`}}>
+                <div id='chart-budget'>
                     Budget
                     <br/>
                     <strong>${budgetWithCommas(overall_budget)}</strong>
                 </div>
-                <hr style={{marginBottom:'0px', width:"97vw", background:'white'}}/>
+                <hr id='chart-budget-line'/>
             </div>
             <Bars inputData={inputData} maxValue={maxValue} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth}/>
         </section>
@@ -128,7 +128,7 @@ function Bars({inputData, maxValue, setSelectedMonth, selectedMonth}){
 
     // UI
     return(
-        <div style={{position:'relative', display:'flex', justifyContent: 'space-evenly', alignItems:'baseline'}}>
+        <div id='chart-bars-container'>
         {spending && spending.map((element, index)=> 
             <MonthlyBar 
                 key={index}
@@ -167,13 +167,13 @@ function MonthlyBar({
 
     // UI
     return(
-        <div style={{display:'flex', flexDirection:'column', alignItems:'center'}} onClick={()=>setSelectedMonth({spending, income, month})}>
+        <div id='chart-bars-coupled' onClick={()=>setSelectedMonth({spending, income, month})}>
           <div>
             <Bar type='spending' height={spendingBarHeight}/>
             <Bar type='income' height={incomeBarHeight}/>
           </div>
           {/* TODO apply gradient for font color */}
-          <div style={{textAlign:'center', width:'3rem',borderRadius:'10px', backgroundColor:`${!selected ? '#172041': 'white'}`, color:`${!selected ? 'white': '#172041'}`}}>
+          <div id='chart-bars-coupled-label' style={{backgroundColor:`${!selected ? '#172041': 'white'}`, color:`${!selected ? 'white': '#172041'}`}}>
             {monthShort}
           </div>
         </div>
@@ -183,13 +183,10 @@ function MonthlyBar({
 function Bar({type, height}){
     // UI
     return(
-        <div style={{
-            display:'inline-block', 
+        <div id='chart-bars-indvi' style={{ 
             backgroundColor:`${type==='spending'? '#428DFC': '#0CE381'}`, 
-            height: `${height}vh`, 
-            width:'15px', 
-            borderRadius:'10px', 
-            marginRight:'5px'}}>
+            height: `${height}vh`
+        }}>
         </div>
     )
 }
